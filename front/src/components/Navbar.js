@@ -3,7 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Badge } from '@material-ui/core';
 import { ShoppingCartOutlined } from '@material-ui/icons';
-import { mobileResposive } from '../responsive'
+import { mobileResposive } from '../responsive';
+import { useSelector } from 'react-redux';
 
 
 const Container = styled.div`
@@ -89,6 +90,9 @@ const NavRight = styled.div`
 
 
 const Navbar = () => {
+
+    const counter = useSelector(state=>state.cart.counter);
+    
     return (
         <Container>
             <Spacing>
@@ -106,7 +110,7 @@ const Navbar = () => {
                     <MenuItem>Register</MenuItem>
                     <MenuItem>Sing in</MenuItem>
                     <MenuItem>
-                    <Badge badgeContent={4} color="primary">
+                    <Badge badgeContent={ counter } color="primary">
                         <ShoppingCartOutlined />
                     </Badge>
                     </MenuItem>

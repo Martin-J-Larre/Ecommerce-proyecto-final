@@ -8,6 +8,8 @@ import Navbar from '../components/Navbar';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
 import { Add, Remove } from "@material-ui/icons";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
 `
@@ -133,6 +135,7 @@ const ProductPage = () => {
     const [counter, setCounter] = useState(1);
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getProduct = async () => {
@@ -155,7 +158,9 @@ const ProductPage = () => {
     }
 
     const handleBtn = () => { 
-        // do it with redux
+        dispatch(
+            addProduct({ product, counter, price:product.price*counter})
+        )
     }
 
     return (
