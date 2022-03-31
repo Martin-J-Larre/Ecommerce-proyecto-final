@@ -130,6 +130,9 @@ const ProductPage = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
+    const [counter, setCounter] = useState(1);
+    const [color, setColor] = useState("");
+    const [size, setSize] = useState("");
 
     useEffect(() => {
         const getProduct = async () => {
@@ -142,6 +145,18 @@ const ProductPage = () => {
         }
         getProduct();
     }, [id]);
+
+    const handleCounter = (count) => { 
+        if (count === "dec") {
+            counter > 1 && setCounter(counter - 1)
+        } else {
+            setCounter(counter + 1)
+        }
+    }
+
+    const handleBtn = () => { 
+        // do it with redux
+    }
 
     return (
         <Container>
@@ -165,17 +180,14 @@ const ProductPage = () => {
                         <FilterProduct>
                             <FilterTitle>Color</FilterTitle>
                             {product.color?.map((c) => (
-                            <FilterColor color={c} key={c} />
+                            <FilterColor color={c} key={c} onClick={()=>setColor(c)}/>
                             ))}
                         </FilterProduct>
                         <FilterProduct>
                             <FilterTitle>
                                 Size
                             </FilterTitle>
-                            <FilterSize>
-                                {/* {product.size.map((s) => (
-                                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                                ))} */}
+                            <FilterSize onChange={(e)=>setSize(e.target.value)}>
                                 {product.size?.map((s) => (
                                 <FilterSizeOption key={s}>{s}</FilterSizeOption>
                                 ))}
@@ -184,11 +196,11 @@ const ProductPage = () => {
                     </FilterContainer>
                     <AddContainer>
                         <QuantityContainer>
-                            <Remove />
-                            <Quantity>1</Quantity>
-                            <Add />
+                            <Remove onClick={()=>handleCounter("dec")}/>
+                            <Quantity>{counter}</Quantity>
+                            <Add onClick={()=>handleCounter("inc")}/>
                         </QuantityContainer>
-                        <Button>ADD TOCART</Button>
+                        <Button onClick={handleBtn}>ADD TO CART</Button>
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>
