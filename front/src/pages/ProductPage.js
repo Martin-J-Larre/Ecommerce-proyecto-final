@@ -1,3 +1,6 @@
+import { useLocation } from "react-router";
+import { useState, useEffect } from "react";
+import { publicReq } from "../reqMethods";
 import { mobileResposive } from "../responsive";
 import styled from "styled-components";
 import Promo from '../components/Promo';
@@ -22,7 +25,6 @@ const ImgContainer = styled.div`
 `
 const Image = styled.img`
     width: 100%;
-    height: 90vh;
     object-fit: cover; 
     ${mobileResposive({
         height: "40vh"
@@ -66,18 +68,19 @@ const FilterTitle = styled.span`
     font-size: 20px;
     font-weight: 200px;
 `
-const FilterColor = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${props=>props.color};
-    margin: 0px 5px;
-    cursor: pointer;
-`
 const FilterSize = styled.select`
     margin-left: 10px;
     padding: 5px;
 `
+const FilterColor = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${(props) => props.color};
+    margin: 0px 5px;
+    cursor: pointer;
+`;
+
 const FilterSizeOption = styled.option`
 
 `
@@ -123,41 +126,59 @@ const Button = styled.button`
 `
 
 const ProductPage = () => {
+
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await publicReq.get("/products/getone/" + id);
+                setProduct(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getProduct();
+    }, [id]);
+
     return (
         <Container>
             <Promo />
             <Navbar />
             <Wrapper>
                 <ImgContainer>
-                    <Image src="https://img.freepik.com/free-photo/jeans_1203-8093.jpg?size=338&ext=jpg&ga=GA1.2.1964942655.1646467495" />
+                    <Image src={product.img} />
                 </ImgContainer>
                 <InfoContainer>
                     <Title>
-                        Jean something
+                        {product.title}
                     </Title>
                     <Desc>
-                        Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem Lorem lorem lorem
+                        {product.desc}
                     </Desc>
                     <Price>
-                        $ 20
+                        {product.price}
                     </Price>
                     <FilterContainer>
                         <FilterProduct>
                             <FilterTitle>Color</FilterTitle>
-                            <FilterColor color="black"/>
-                            <FilterColor color="darkblue"/>
-                            <FilterColor color="gray"/>
+                            {product.color?.map((c) => (
+                            <FilterColor color={c} key={c} />
+                            ))}
                         </FilterProduct>
                         <FilterProduct>
                             <FilterTitle>
                                 Size
                             </FilterTitle>
                             <FilterSize>
-                                <FilterSizeOption>XS</FilterSizeOption>
-                                <FilterSizeOption>S</FilterSizeOption>
-                                <FilterSizeOption>M</FilterSizeOption>
-                                <FilterSizeOption>L</FilterSizeOption>
-                                <FilterSizeOption>XL</FilterSizeOption>
+                                {/* {product.size.map((s) => (
+                                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                ))} */}
+                                {product.size?.map((s) => (
+                                <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                ))}
                             </FilterSize>
                         </FilterProduct>
                     </FilterContainer>

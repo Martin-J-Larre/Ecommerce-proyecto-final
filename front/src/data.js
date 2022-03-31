@@ -25,13 +25,13 @@ export const categories = [
         id:1,
         img:"https://img.freepik.com/free-photo/why-so-serious-questioned-surprised-young-cute-brunette-female-with-freckles-red-t-shirt-cannot-understand-what-happening-shrugging-raise-hands-up-clueless-smiling-concerned_176420-36424.jpg?w=740&t=st=1648353653~exp=1648354253~hmac=7b8a020bd960080c3f5c33739d1b0b3829b04fa7a5e42b27a6b937b6125dacb6",
         title:"T-SHIRT",
-        cat:"tshirt"
+        cat:"Tshirt"
     },
     {
         id:2,
         img:"https://img.freepik.com/free-photo/fashionable-pale-brunette-long-green-dress-black-jacket-sunglasses-standing-street-during-daytime-against-wall-light-city-building_197531-24468.jpg?t=st=1648352048~exp=1648352648~hmac=7b162d4407f8707065b0d2cc6c41a327b10bd716b9d6c18666ec2bed64b5f2fe&w=740",
         title:"DRESSES",
-        cat:"dresses"
+        cat:"Dresses"
     },
     {
         id:3,
