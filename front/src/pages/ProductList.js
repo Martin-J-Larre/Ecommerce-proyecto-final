@@ -1,3 +1,5 @@
+import { useLocation } from "react-router";
+import { useState } from "react";
 import { mobileResposive } from "../responsive";
 import styled from "styled-components";
 import NavBar from '../components/Navbar';
@@ -51,6 +53,22 @@ const Option = styled.option`
 `
 
 const ProductList = () => {
+
+    const location = useLocation();
+    const cat = location.pathname.split("/")[2];
+
+    const [filters, setFilters] = useState({});
+    const [sort, setSort] = useState("Newest");
+
+    const handleFilter = (e) => { 
+        const value = e.target.value;
+        setFilters({
+            ...filters,
+            [e.target.name]: value,
+        })
+    }
+    // console.log(filter);
+
     return (
         <Container>
             <Promo />
@@ -61,8 +79,8 @@ const ProductList = () => {
                     <FilterText>
                         Filter Products:
                     </FilterText>
-                    <Select>
-                        <Option disabled selected>
+                    <Select name="color" onChange={ handleFilter }>
+                        <Option disabled >
                             Color
                         </Option>
                         <Option>White</Option>
@@ -72,8 +90,8 @@ const ProductList = () => {
                         <Option>Yellow</Option>
                         <Option>Green</Option>
                     </Select>
-                    <Select>
-                        <Option disabled selected>
+                    <Select name="size" onChange={ handleFilter }>
+                        <Option disabled >
                             Size
                         </Option>
                         <Option>XS</Option>
@@ -87,14 +105,14 @@ const ProductList = () => {
                     <FilterText>
                         Sort Products:
                     </FilterText>
-                    <Select>
-                        <Option selected>Newest</Option>
-                        <Option>Price (+)</Option>
-                        <Option>Price (-)</Option>
+                    <Select onChange={(e) => setSort(e.target.value)}>
+                        <Option value="newest">Newest</Option>
+                        <Option value="asc">Price (+)</Option>
+                        <Option value="desc">Price (-)</Option>
                     </Select>
                 </FilterProduct>
             </FilterContainer>
-            <Product />
+            <Product cat={cat} filters={filters} sort={sort}/>
             <Newsletter />
             <Footer />
         </Container>
