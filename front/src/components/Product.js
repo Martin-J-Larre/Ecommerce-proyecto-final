@@ -13,26 +13,41 @@ const Container = styled.div`
 `
 
 const Product = ({ cat, filters, sort }) => {
-    //// console.log(cat,filters,sort);
+    
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const res = await axios.get("http://localhost:8081/api/products/getall");
-                console.log(res);
+                const res = await axios.get( 
+                    cat 
+                    ? `http://localhost:8081/api/products/getall?category=${cat}`
+                    : `http://localhost:8081/api/products/getall`
+                );
+                setProducts(res.data)
+                ////console.log(res);
             } catch (err) {
                 
             }
         }
         getProducts()
-    }, [cat])
+    }, [cat]);
+
+    useEffect(() => {
+        cat && setFilteredProducts(
+            products.filter((item) =>
+            Object.entries(filters).every(([key, value]) =>
+            item[key].includes(value)
+            )
+        )
+    )
+    }, [products,cat, filters])
 
 
     return (
         <Container>
-            { popularProducts.map((item) => (
+            { filteredProducts.map((item) => (
                 <ProductItem item={ item } key={item.id}/>
             ))}
         </Container>
