@@ -32,14 +32,14 @@ const Container = styled.div`
         opacity: 1;
     }
 `
-// Encontrar productos y sacarle el fondo
-// const Circle = styled.div`
-//     width: 200px;
-//     height: 200px;
-//     border-radius: 50%;
-//     background-color: #fff;
-//     position: absolute;  
-// `
+
+const Circle = styled.div`
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;  
+`
 const Image = styled.img`
     height: 75%;
     z-index: 2; 
@@ -66,7 +66,7 @@ const IconContainer = styled.div`
 const ProductItem = ({ item }) => {
     return (
         <Container>
-            {/* <Circle /> */}
+            <Circle />
             <Image src={ item.img } />
             <Info>
                 <IconContainer>
