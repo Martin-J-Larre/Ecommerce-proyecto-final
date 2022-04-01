@@ -1,15 +1,14 @@
-import { mobileResposive } from "../responsive";
-import styled from "styled-components";
-import Promo from "../components/Promo";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
-import StripeCheckout from 'react-stripe-checkout';
-import { useState } from "react";
+import { mobileResposive } from "../responsive";//
+import styled from "styled-components";//
+import Promo from "../components/Promo";//
+import Navbar from "../components/Navbar";//
+import Footer from "../components/Footer";//
+import { Add, Remove } from "@material-ui/icons";//
+import { useSelector } from "react-redux";//
+import StripeCheckout from 'react-stripe-checkout';//
+import { useState, useEffect } from "react";//
 import { userReq } from "../reqMethods";
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -159,7 +158,7 @@ const SummaryButton = styled.button`
 
 const CartPage = () => {
 
-    const cart = useSelector(state=>state.cart);
+    const cart = useSelector((state) => state.cart);
     const [stripeToken, setStripeToken] = useState(null);
     const history = useHistory()
 
@@ -174,7 +173,10 @@ const CartPage = () => {
                     tokenId: stripeToken.id,
                     amount: 500,
                 })
-                history.push("/success",{data:res.data});
+                history.push("/success",{
+                    stripeData: res.data,
+                    products: cart,
+                });
             } catch (err) {
                 console.log(err);
             }
@@ -198,7 +200,7 @@ const CartPage = () => {
                 </AboveContainer>
                 <BelowContainer>
                     <Info>
-                        { cart.products.map((product) => (<ProductContainer>
+                        {cart.products.map((product) => (<ProductContainer>
                             <ProductDetail>
                                 <Image src={ product.img }/>
                                 <Detail>
