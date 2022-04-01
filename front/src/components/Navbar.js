@@ -91,7 +91,7 @@ const NavRight = styled.div`
 
 const Navbar = () => {
 
-    const counter = useSelector(state=>state.cart.counter);
+    const quantity = useSelector(state=>state.cart.quantity)
     
     return (
         <Container>
@@ -110,7 +110,7 @@ const Navbar = () => {
                     <MenuItem>Register</MenuItem>
                     <MenuItem>Sing in</MenuItem>
                     <MenuItem>
-                    <Badge badgeContent={ counter } color="primary">
+                    <Badge badgeContent={ quantity } color="primary">
                         <ShoppingCartOutlined />
                     </Badge>
                     </MenuItem>

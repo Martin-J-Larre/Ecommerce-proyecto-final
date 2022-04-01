@@ -3,77 +3,75 @@ import { useState, useEffect } from "react";
 import { publicReq } from "../reqMethods";
 import { mobileResposive } from "../responsive";
 import styled from "styled-components";
-import Promo from '../components/Promo';
-import Navbar from '../components/Navbar';
-import Newsletter from '../components/Newsletter';
-import Footer from '../components/Footer';
+import Promo from "../components/Promo";
+import Navbar from "../components/Navbar";
+import Newsletter from "../components/Newsletter";
+import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 
-const Container = styled.div`
-`
+const Container = styled.div``;
 const Wrapper = styled.div`
     padding: 50px;
     display: flex;
     ${mobileResposive({
         marginTop: "20px",
         padding: "10px",
-        flexDirection: "column"
+        flexDirection: "column",
     })}
-`
+`;
 const ImgContainer = styled.div`
     flex: 1;
-`
+`;
 const Image = styled.img`
     width: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     ${mobileResposive({
-        height: "40vh"
+        height: "40vh",
     })}
-`
+`;
 const InfoContainer = styled.div`
     flex: 1;
     padding: 0px 50px;
     ${mobileResposive({
-        padding: "10px"
+        padding: "10px",
     })}
-`
+`;
 const Title = styled.h1`
     font-weight: 200;
     ${mobileResposive({
-        textAlign: "center"
+        textAlign: "center",
     })}
-`
+`;
 const Desc = styled.p`
     margin: 20px 0px;
-`
+`;
 const Price = styled.span`
     font-weight: 100;
     font-size: 40px;
-`
+`;
 const FilterContainer = styled.div`
     width: 50%;
     margin: 30px 0px;
     display: flex;
     justify-content: space-between;
     ${mobileResposive({
-        width: "100%"
+        width: "100%",
     })}
-`
+`;
 const FilterProduct = styled.div`
     display: flex;
     align-items: center;
-
-`
+`;
 const FilterTitle = styled.span`
     font-size: 20px;
     font-weight: 200px;
-`
+`;
 const FilterSize = styled.select`
     margin-left: 10px;
     padding: 5px;
-`
+`;
 const FilterColor = styled.div`
     width: 20px;
     height: 20px;
@@ -83,27 +81,24 @@ const FilterColor = styled.div`
     cursor: pointer;
 `;
 
-const FilterSizeOption = styled.option`
-
-`
+const FilterSizeOption = styled.option``;
 const AddContainer = styled.div`
     display: flex;
     align-content: center;
     justify-content: space-between;
-    width: 50%; 
+    width: 50%;
     ${mobileResposive({
-        width: "100%"
+        width: "100%",
     })}
-`
+`;
 const QuantityContainer = styled.div`
     display: flex;
     align-items: center;
     font-weight: 700;
     ${mobileResposive({
-        marginLeft: "25px"
+        marginLeft: "25px",
     })}
-
-`
+`;
 const Quantity = styled.span`
     width: 30px;
     height: 30px;
@@ -111,28 +106,26 @@ const Quantity = styled.span`
     border: 1px solid teal;
     display: flex;
     align-items: center;
-    justify-content: center;  
+    justify-content: center;
     margin: 5px;
-`
+`;
 const Button = styled.button`
     padding: 15px;
     border: 2px solid teal;
     background-color: #fff;
-    cursor: pointer; 
-    font-weight: 600; 
+    cursor: pointer;
+    font-weight: 600;
 
-    &:hover{
+    &:hover {
         background-color: #f8f4f4; //! cambiar color de todo tematica verizon
     }
-
-`
+`;
 
 const ProductPage = () => {
-
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
-    const [counter, setCounter] = useState(1);
+    const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
     const dispatch = useDispatch();
@@ -147,21 +140,19 @@ const ProductPage = () => {
             }
         }
         getProduct();
-    }, [id]);
-
-    const handleCounter = (count) => { 
-        if (count === "dec") {
-            counter > 1 && setCounter(counter - 1)
+    }, [id])
+    
+    const handleQuantity = (type) => {
+        if (type === "dec") {
+            quantity > 1 && setQuantity(quantity - 1);
         } else {
-            setCounter(counter + 1)
+            setQuantity(quantity + 1);
         }
-    }
+    };
 
-    const handleBtn = () => { 
-        dispatch(
-            addProduct({ product, counter, price:product.price*counter})
-        )
-    }
+    const handleClick = () => {
+        dispatch(addProduct({...product, quantity, color, size }));
+    };
 
     return (
         <Container>
@@ -172,47 +163,47 @@ const ProductPage = () => {
                     <Image src={product.img} />
                 </ImgContainer>
                 <InfoContainer>
-                    <Title>
-                        {product.title}
-                    </Title>
-                    <Desc>
-                        {product.desc}
-                    </Desc>
-                    <Price>
-                        {product.price}
-                    </Price>
+                    <Title>{product.title}</Title>
+                    <Desc>{product.desc}</Desc>
+                    <Price>{product.price}</Price>
                     <FilterContainer>
                         <FilterProduct>
                             <FilterTitle>Color</FilterTitle>
                             {product.color?.map((c) => (
-                            <FilterColor color={c} key={c} onClick={()=>setColor(c)}/>
+                                <FilterColor
+                                    color={c}
+                                    key={c}
+                                    onClick={() => setColor(c)}
+                                />
                             ))}
                         </FilterProduct>
                         <FilterProduct>
-                            <FilterTitle>
-                                Size
-                            </FilterTitle>
-                            <FilterSize onChange={(e)=>setSize(e.target.value)}>
+                            <FilterTitle>Size</FilterTitle>
+                            <FilterSize
+                                onChange={(e) => setSize(e.target.value)}
+                            >
                                 {product.size?.map((s) => (
-                                <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                    <FilterSizeOption key={s}>
+                                        {s}
+                                    </FilterSizeOption>
                                 ))}
                             </FilterSize>
                         </FilterProduct>
                     </FilterContainer>
                     <AddContainer>
                         <QuantityContainer>
-                            <Remove onClick={()=>handleCounter("dec")}/>
-                            <Quantity>{counter}</Quantity>
-                            <Add onClick={()=>handleCounter("inc")}/>
+                            <Remove onClick={() => handleQuantity("dec")} />
+                            <Quantity>{quantity}</Quantity>
+                            <Add onClick={() => handleQuantity("inc")} />
                         </QuantityContainer>
-                        <Button onClick={handleBtn}>ADD TO CART</Button>
+                        <Button onClick={handleClick}>ADD TO CART</Button>
                     </AddContainer>
                 </InfoContainer>
             </Wrapper>
             <Newsletter />
             <Footer />
         </Container>
-    )
-}
+    );
+};
 
-export default ProductPage
+export default ProductPage;
