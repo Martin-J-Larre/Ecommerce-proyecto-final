@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { createPayment } = require("../controllers/paymentController")
 
-router.post("/payment"); 
+router.post("/payment", createPayment); 
 
 
 module.exports = router;
