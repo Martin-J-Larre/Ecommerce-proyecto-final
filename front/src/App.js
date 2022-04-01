@@ -2,7 +2,7 @@ import HomePage from './pages/HomePage';
 import ProductList from './pages/ProductList';
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
-import Login from "./pages/LoginPage";
+import LoginPage from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 
 import {
@@ -12,9 +12,10 @@ import {
     Redirect,
 } from "react-router-dom";
 import SuccessPage from './pages/SuccessPage';
+import { useSelector } from 'react-redux';
 
 function App() {
-    const user = true;
+    const user = useSelector((state) => state.user.currentUser);
     return (
         <Router>
             <Switch>
@@ -34,7 +35,7 @@ function App() {
                     <SuccessPage />
                 </Route>
                 <Route path='/login'>
-                    { user ? <Redirect to="/"/> : <Login />}
+                    { user ? <Redirect to="/"/> : <LoginPage />}
                 </Route>
                 <Route path='/register'>
                 { user ? <Redirect to="/"/> : <Register /> }

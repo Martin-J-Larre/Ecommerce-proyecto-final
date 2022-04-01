@@ -1,5 +1,8 @@
-import { mobileResposive } from "../responsive";
-import styled from "styled-components";
+import { mobileResposive } from "../responsive";//
+import styled from "styled-components";//
+import { useState } from "react";//
+import { login } from "../redux/apiCalls";//
+import { useDispatch, useSelector } from "react-redux";//
 
 const Container = styled.div`
     width: 100vw;
@@ -46,25 +49,49 @@ const Button = styled.button`
     padding: 15px 20px;
     background-color: teal;
     color: white;
-    cursor: pointer; 
+    cursor: pointer;
+    &:disabled{
+        color: green;
+        cursor: not-allowed;
+    } 
 `
 const Link = styled.a`
     margin: 5px auto; 
     font-size: 12px;
     text-decoration: underline; 
     cursor: pointer;
-
 `
+const Error = styled.span`
+    color: red;
+    margin: 2px auto; 
+    font-size: 12px;
+    background-color: #f8d7da; 
+    padding: 5px
+`;
 
-const Login = () => {
+const LoginPage = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const { isFetching, error } = useSelector((state) => state.user)
+
+    
+    const handleBtn = (e) => {
+        e.preventDefault()
+        login(dispatch,{ username, password})
+    }
     return (
         <Container>
         <Wrapper>
             <Title>SIGN IN</Title>
             <Form>
-                <Input placeholder="username" />
-                <Input placeholder="password" />
-                <Button>LOGIN</Button>
+                <Input placeholder="username" onChange={(e)=>setUsername(e.target.value)} />
+                <Input placeholder="password" type="password" onChange={(e)=>setPassword(e.target.value)} />
+                <Button onClick={ handleBtn }
+                        disabled={ isFetching } >
+                    LOGIN
+                </Button>
+                {error && <Error>Something went wrong...</Error>}
                 <Link>FORGOT PASSWORD? click here</Link>
                 <Link>CREATE A NEW ACCOUNT, click here</Link>
             </Form>
@@ -73,4 +100,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default LoginPage;
