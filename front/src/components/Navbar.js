@@ -1,5 +1,6 @@
 import { FaSearch } from 'react-icons/fa';
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components'
 import { Badge } from '@material-ui/core';
 import { ShoppingCartOutlined } from '@material-ui/icons';
@@ -109,12 +110,13 @@ const Navbar = () => {
                 <NavRight>
                     <MenuItem>Register</MenuItem>
                     <MenuItem>Sing in</MenuItem>
+                    <Link to="/cart">
                     <MenuItem>
                     <Badge badgeContent={ quantity } color="primary">
                         <ShoppingCartOutlined />
                     </Badge>
                     </MenuItem>
-                        
+                    </Link>
                 </NavRight>
             </Spacing>
         </Container>

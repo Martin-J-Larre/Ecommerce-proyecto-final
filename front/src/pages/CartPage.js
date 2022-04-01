@@ -4,6 +4,7 @@ import Promo from "../components/Promo";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
 const Container = styled.div``
 
@@ -150,6 +151,9 @@ const SummaryButton = styled.button`
 `
 
 const CartPage = () => {
+
+    const cart = useSelector(state=>state.cart)
+
     return (
         <Container>
             <Promo />
@@ -166,51 +170,32 @@ const CartPage = () => {
                 </AboveContainer>
                 <BelowContainer>
                     <Info>
-                        <ProductContainer>
+                        { cart.products.map((product) => (<ProductContainer>
                             <ProductDetail>
-                                <Image src="https://img.freepik.com/free-photo/jeans_1203-8093.jpg?size=338&ext=jpg&ga=GA1.2.1964942655.1646467495"/>
+                                <Image src={ product.img }/>
                                 <Detail>
-                                    <ProductName><b>Product:</b> JEAN COOL</ProductName>
-                                    <ProductID><b>ID:</b> 857463535</ProductID>
-                                    <ProductColor color="black"/>
-                                    <ProductSize><b>Size:</b> M </ProductSize>
+                                    <ProductName><b>Product:</b>{ product.title }</ProductName>
+                                    <ProductID><b>ID:</b>{ product._id }</ProductID>
+                                    <ProductColor color={ product.color }/>
+                                    <ProductSize><b>Size:</b>{ product.size }</ProductSize>
                                 </Detail>
                             </ProductDetail>
                             <ProductPriceDetail>
                                 <ProductQuantityContainer>
                                     <Add />
-                                    <ProductQuantity>2</ProductQuantity>
+                                    <ProductQuantity>{ product.quantity }</ProductQuantity>
                                     <Remove />
                                 </ProductQuantityContainer>
-                                <ProductPrice>$ 300</ProductPrice>
+                                <ProductPrice>$ { product.price * product.quantity }</ProductPrice>
                             </ProductPriceDetail>
-                        </ProductContainer>
                         <Hr/>
-                        <ProductContainer>
-                            <ProductDetail>
-                                <Image src="https://img.freepik.com/free-photo/black-suede-line-skirt-with-design-space-women-s-street-fashion_53876-102866.jpg?t=st=1648446173~exp=1648446773~hmac=c7c1327a8d3eaf47593508580c731f0c514a76183085aafcedceedf7b74cde66&w=740"/>
-                                <Detail>
-                                    <ProductName><b>Product:</b> SKIRT</ProductName>
-                                    <ProductID><b>ID:</b> 857463535</ProductID>
-                                    <ProductColor color="black"/>
-                                    <ProductSize><b>Size:</b> M </ProductSize>
-                                </Detail>
-                            </ProductDetail>
-                            <ProductPriceDetail>
-                                <ProductQuantityContainer>
-                                    <Add />
-                                    <ProductQuantity>8</ProductQuantity>
-                                    <Remove />
-                                </ProductQuantityContainer>
-                                <ProductPrice>$ 100</ProductPrice>
-                            </ProductPriceDetail>   
-                        </ProductContainer>
+                        </ProductContainer> ))}
                     </Info>
                     <SummaryContainer>
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>$ 60</SummaryItemPrice>
+                            <SummaryItemPrice>$ { cart.total }</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Shipping</SummaryItemText>
@@ -222,7 +207,7 @@ const CartPage = () => {
                         </SummaryItem>
                         <SummaryItem type="total">
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>$ 70</SummaryItemPrice>
+                            <SummaryItemPrice>$ { cart.total }</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryButton>CHECKOUT NOW</SummaryButton>
                     </SummaryContainer>
