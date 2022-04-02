@@ -30,10 +30,10 @@ const updateCart = async (req, res) => {
 //--------- Delete cart
 const deleteCart = async (req, res) => {
     try {
-        await Cart.findByIdAndDelete(req.params.id)
-        res.status(200).json("Cart has been deleted!!!")
+        await Cart.findByIdAndDelete(req.params.id);
+        res.status(200).json("Cart has been deleted!!!");
     } catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
 }
 
@@ -44,7 +44,7 @@ const getUserCart = async (req, res) => {
         const cart = await Cart.findOne({ userId: req.params.userId });
         res.status(200).json( cart );
     } catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
 }
 
@@ -58,9 +58,10 @@ const getAllCarts = async (req, res) => {
     }
 }
 
-
-
-
-
-
-module.exports = { createCart, updateCart, deleteCart, getUserCart, getAllCarts }
+module.exports = { 
+    createCart, 
+    updateCart, 
+    deleteCart, 
+    getUserCart, 
+    getAllCarts 
+}

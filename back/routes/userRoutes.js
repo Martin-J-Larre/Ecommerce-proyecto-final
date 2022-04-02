@@ -12,14 +12,16 @@ const {
     updateUser, 
     deleteUser, 
     getOneUser, 
-    getAllUsers 
+    getAllUsers,
+    getUserStats 
 } = require('../controllers/userController');
 
 
-router.get('/getall/', verifyTokenAndAdmin, getAllUsers);
+router.put('/:id', verifyTokenAndAuthorization, updateUser);
+router.delete('/:id', verifyTokenAndAuthorization, deleteUser);
 router.get('/getone/:id', verifyTokenAndAdmin, getOneUser);
-router.put('/update/:id', verifyTokenAndAuthorization, updateUser);
-router.delete('/delete/:id', verifyTokenAndAuthorization, deleteUser);
+router.get('/', verifyTokenAndAdmin, getAllUsers);
+router.get('/stats', verifyTokenAndAdmin, getUserStats);
 
 
 module.exports = router;

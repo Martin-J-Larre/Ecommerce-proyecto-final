@@ -13,15 +13,17 @@ const {
     updateOrder, 
     deleteOrder, 
     getUserOrders, 
-    getAllOrders 
+    getAllOrders,
+    getMonthlyIncome 
 } = require('../controllers/orderController');
 
 
-router.post("/add/", verifyToken, createOrder);//ok
-router.get("/getall/", verifyTokenAndAdmin, getAllOrders); //ok
-router.get("/userorders/:userId", verifyTokenAndAuthorization, getUserOrders); //ok
-router.put("/update/:id", verifyTokenAndAdmin, updateOrder);//ok
-router.delete("/delete/:id", verifyTokenAndAdmin, deleteOrder);//ok
+router.post("/", verifyToken, createOrder);
+router.put("/:id", verifyTokenAndAdmin, updateOrder);
+router.delete("/:id", verifyTokenAndAdmin, deleteOrder);
+router.get("/userorders/:userId", verifyTokenAndAuthorization, getUserOrders);
+router.get("/", verifyTokenAndAdmin, getAllOrders); 
+router.get("/income", verifyTokenAndAdmin, getMonthlyIncome); 
 
 module.exports = router;
 

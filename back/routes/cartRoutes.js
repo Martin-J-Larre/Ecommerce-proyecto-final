@@ -17,10 +17,10 @@ const {
 } = require('../controllers/cartController');
 
 
-router.post("/add/", verifyToken, createCart); //
-router.get("/getall/", verifyTokenAndAdmin, getAllCarts);
-router.get("/getone/:userId", verifyTokenAndAuthorization, getUserCart);
-router.put("/update/:id", verifyTokenAndAuthorization, updateCart); //
-router.delete("/delete/:id", verifyTokenAndAuthorization, deleteCart); //
+router.post("/", verifyToken, createCart); 
+router.put("/:id", verifyTokenAndAuthorization, updateCart); 
+router.delete("/:id", verifyTokenAndAuthorization, deleteCart); 
+router.get("/usercart/:userId", verifyTokenAndAuthorization, getUserCart);
+router.get("/", verifyTokenAndAdmin, getAllCarts);
 
 module.exports = router;
