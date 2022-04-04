@@ -6,9 +6,9 @@ export const productSlice = createSlice({
         products: [],
         isFetching: false,
         error: false,
+        scc: false,
     },
     reducers: {
-        //GET ALL
         getProductStart: (state) => {
             state.isFetching = true;
             state.error = false;
@@ -21,11 +21,12 @@ export const productSlice = createSlice({
             state.isFetching = false;
             state.error = true;
         },
-        //DELETE
+
         deleteProductStart: (state) => {
             state.isFetching = true;
             state.error = false;
         },
+
         deleteProductSuccess: (state, action) => {
             state.isFetching = false;
             state.products.splice(
@@ -33,28 +34,50 @@ export const productSlice = createSlice({
                 1
             );
         },
+
         deleteProductFailure: (state) => {
             state.isFetching = false;
             state.error = true;
         },
-        //UPDATE
+
         updateProductStart: (state) => {
             state.isFetching = true;
             state.error = false;
         },
+
+        updateProductSuccess8: (state, action) => {
+            state.isFetching = false;
+            state.products.splice(
+                state.products.findIndex(
+                    (product) => product._id === action.payload
+                ),
+                1
+            );
+        },
+
         updateProductSuccess: (state, action) => {
             state.isFetching = false;
-            state.products[
-                state.products.findIndex(
-                    (item) => item._id === action.payload.id
-                )
-            ] = action.payload.product;
+            state.scc = true;
+            const prdIndex = state.products.findIndex(
+                (product) => product._id === action.payload.id
+            );
+            state.products[prdIndex].title = action.payload.name;
+            state.products[prdIndex].desc = action.payload.desc;
+            state.products[prdIndex].price = parseInt(action.payload.price, 10);
+            state.products[prdIndex].categories = [];
+            state.products[prdIndex].categories.push(action.payload.category);
+            state.products[prdIndex].color = [];
+            state.products[prdIndex].color.push(action.payload.color);
+            state.products[prdIndex].size = [];
+            state.products[prdIndex].size.push(action.payload.size);
+            state.products[prdIndex].inStock = action.payload.stt;
         },
+
         updateProductFailure: (state) => {
             state.isFetching = false;
             state.error = true;
         },
-        //UPDATE
+
         addProductStart: (state) => {
             state.isFetching = true;
             state.error = false;
@@ -79,6 +102,7 @@ export const {
     deleteProductFailure,
     updateProductStart,
     updateProductSuccess,
+    updateProductSuccess8,
     updateProductFailure,
     addProductStart,
     addProductSuccess,

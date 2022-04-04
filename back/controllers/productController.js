@@ -1,56 +1,57 @@
-const Product = require('../models/ProductModel');
+const Product = require("../models/ProductModel");
 
-//----------- Create product
+//------------CREATE
 const createProduct = async (req, res) => {
     const newProduct = new Product(req.body);
+
     try {
         const savedProduct = await newProduct.save();
-        res.status(200).json( savedProduct );
+        res.status(200).json(savedProduct);
     } catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
-}
+};
 
-// ----------- Update product
+//----------------UPDATE
 const updateProduct = async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
-            req.params.id,
+            req.params._id,
             {
                 $set: req.body,
             },
             { new: true }
         );
-        res.status(200).json( updatedProduct );
+        res.status(200).json(updatedProduct);
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
-//---------- Delete product
+//-----------DELETE
 const deleteProduct = async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
-        res.status(200).json("Product has been deleted!!!");
+        res.status(200).json("User has been deleted...");
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
-//------------- Get product
+//-----------GET PRODUCT
 const getOneProduct = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
-        res.status(200).json( product );
+        res.status(200).json(product);
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
-//----------- Get all products
+//-----------GET ALL PRODUCTS
 const getAllProducts = async (req, res) => {
-    const qNew = req.query.new; 
-    const qCategory = req.query.category; 
+    const qNew = req.query.new;
+    const qCategory = req.query.category;
     try {
         let products;
 
@@ -66,17 +67,16 @@ const getAllProducts = async (req, res) => {
             products = await Product.find();
         }
 
-        res.status(200).json( products );
+        res.status(200).json(products);
     } catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
-}
+};
 
-
-module.exports = { 
-    createProduct, 
-    updateProduct, 
-    deleteProduct, 
-    getOneProduct, 
-    getAllProducts 
+module.exports = {
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    getOneProduct,
+    getAllProducts
 }

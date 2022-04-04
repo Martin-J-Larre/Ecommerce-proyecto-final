@@ -1,5 +1,4 @@
 .widgetSm{
-    flex: 1;
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
     padding: 20px;
@@ -9,6 +8,7 @@
 .widgetSmTitle{
     font-size: 22px;
     font-weight: 600;
+    color: teal;
 }
 
 .widgetSmImg{
@@ -58,4 +58,21 @@
 .widgetSmIcon{
     font-size: 16px !important;
     margin-right: 5px;
+}
+
+.z button{
+    margin-left: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+.ban {
+    background-color: rgb(255, 60, 60);
+}
+
+.promote {
+    background-color: teal;
 }

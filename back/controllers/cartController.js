@@ -1,17 +1,19 @@
-const Cart = require('../models/CartModel');
+const Cart = require("../models/CartModel");
 
-//------- Create cart
+
+//----------CREATE
 const createCart = async (req, res) => {
-    const newCart = new Cart(req.body)
-    try {
-        const savedCart = await newCart.save()
-        res.status(200).json( savedCart )
-    } catch (err) {
-        res.status(400).json
-    }
-}
+    const newCart = new Cart(req.body);
 
-//-------- Update cart
+    try {
+        const savedCart = await newCart.save();
+        res.status(200).json(savedCart);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};
+
+//-------------UPDATE
 const updateCart = async (req, res) => {
     try {
         const updatedCart = await Cart.findByIdAndUpdate(
@@ -25,43 +27,42 @@ const updateCart = async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
-//--------- Delete cart
+//----------------DELETE
 const deleteCart = async (req, res) => {
     try {
         await Cart.findByIdAndDelete(req.params.id);
-        res.status(200).json("Cart has been deleted!!!");
+        res.status(200).json("Cart has been deleted...");
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
-//------ Get user cart
-
+//---------GET USER CART
 const getUserCart = async (req, res) => {
     try {
         const cart = await Cart.findOne({ userId: req.params.userId });
-        res.status(200).json( cart );
+        res.status(200).json(cart);
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
-//-------- Get All cart
+// ----------GET ALL
 const getAllCarts = async (req, res) => {
     try {
         const carts = await Cart.find();
-        res.status(200).json( carts )
+        res.status(200).json(carts);
     } catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err);
     }
-}
+};
 
-module.exports = { 
-    createCart, 
-    updateCart, 
-    deleteCart, 
-    getUserCart, 
-    getAllCarts 
+module.exports = {
+    createCart,
+    updateCart,
+    deleteCart,
+    getUserCart,
+    getAllCarts
 }
