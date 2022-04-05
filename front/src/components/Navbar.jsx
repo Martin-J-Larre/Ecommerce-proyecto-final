@@ -123,7 +123,7 @@ const Navbar = () => {
           :
           <Right>
             <Link to="/profile" style={{color: "black", textDecoration:"none"}}>
-              <button onClick={()=>unconfirmPass()} style={{fontWeight:"normal", backgroundColor:"transparent", border:"none", outline:"none", fontSize:"18px", cursor:"pointer"}}>{user.username}</button>
+              <button onClick={()=>unconfirmPass()} style={{fontWeight:"normal", backgroundColor:"transparent", border:"none", outline:"none", fontSize:"18px", cursor:"pointer"}}>Welcome {user.username}</button>
             </Link>
             <Link to="/login">
             <MenuItem onClick={handleClick}><LogoutIcon style={{marginTop:"2px"}}/></MenuItem>

@@ -23,14 +23,18 @@ const Left = styled.div`
     padding: 20px;
 `;
 
-const Logo = styled.h1``;
+const Logo = styled.h1`
+    font-family: 'Source Serif Pro', serif;
+    margin-left:30px;
+`;
 
 const Desc = styled.p`
-    margin: 20px 0px;
+    margin: 10px 30px;
 `;
 
 const SocialContainer = styled.div`
     display: flex;
+    margin: 5px 40px;
 `;
 
 const SocialIcon = styled.div`
@@ -87,13 +91,11 @@ const Footer = () => {
     return (
         <Container>
             <Left>
-                <Logo>S&amp;A</Logo>
+                <Logo>Kirei</Logo>
                 <Desc>
                     Lorem Ipsum has been the industry's standard dummy text ever
                     since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged.
+                    type and scrambled it to make a type specimen book. 
                 </Desc>
                 <SocialContainer>
                     <SocialIcon color="3B5999">

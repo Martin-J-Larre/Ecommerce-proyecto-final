@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Announcement = () => {
-  return <Container>Super deal ! Free shipping until March !</Container>;
+  return <Container>Super deal ! Free shipping until October !</Container>;
 };
 
 export default Announcement;

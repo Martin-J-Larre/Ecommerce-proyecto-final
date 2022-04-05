@@ -106,14 +106,14 @@ const Success = () => {
     <Announcement/>
     <Container>
       <Container2>
-      <h1 style={{fontSize:"40px"}}>S&amp;A</h1>
+      <h1 style={{fontSize:"40px"}}>Kirei</h1>
       <span>Payement Receipt</span>
       </Container2>
       <Container3>
         <Duo>
         <Duo3>
           <Room style={{marginRight:"10px"}}/>
-          <span>Wall Street, Lake Banks 2, 2046</span>
+          <span>Some address, Lake Banks 2, 2046</span>
         </Duo3>
         <Duo3>
           <DateRangeIcon style={{marginRight:"10px"}}/>
@@ -122,11 +122,11 @@ const Success = () => {
         </Duo>
         <Duo>
           <Duo2>
-          <span>+(216) 58521172 / 93011606</span>
+          <span>+(000) 12 123 000 / +(000) 93 011 000</span>
           <Phone style={{marginLeft:"10px"}}/>
           </Duo2>
           <Duo2>
-          <span>sa-retail@gmail.com</span>
+          <span>Kirei-contact@kirei.com</span>
           <MailOutline style={{marginLeft:"10px"}}/>
           </Duo2>
         </Duo>
