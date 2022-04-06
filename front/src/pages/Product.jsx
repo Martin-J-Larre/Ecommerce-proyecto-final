@@ -26,28 +26,30 @@ import DoneIcon from '@mui/icons-material/Done';
 const Container = styled.div``;
 
 const Wrapper = styled.div`
-  padding: 50px;
+  margin:30px 0px;
+  padding: 0px 20px;
   display: flex;
+  border-bottom:1px solid #eee;
   ${mobile({ padding: "10px", flexDirection: "column" })}
   
 `;
 
 const ImgContainer = styled.div`
-
-  flex: 2;
+width: 20%;
 `;
 
 const Image = styled.img`
   width: 100%;
-  height: 90vh;
+  margin: 30px;
   object-fit: contain;
   ${mobile({ height: "40vh" })}
 `;
 
 const InfoContainer = styled.div`
-  flex: 1;
-  margin-top: 12%;
-  padding: 50px;
+  flex:2;
+  margin-top:30px;
+  margin-left: 70px;
+  padding:20px;
   height: fit-content;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
@@ -56,10 +58,10 @@ const InfoContainer = styled.div`
 `;
 
 const CommentContainer = styled.div`
-  flex: 2;
+  flex: 3;
   padding: 0px 50px;
   ${mobile({ padding: "10px" })};
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -155,11 +157,10 @@ const Button = styled.button`
 const Duo = styled.div`
   display: flex;
   flex-direction: row;
-    
   align-items: center;
   width: 100%;
   border-radius: 12px;
-  padding: 10px 20px;
+  padding: 10px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
   margin-top:10px;
@@ -171,7 +172,7 @@ const Cwrapper = styled.div`
   flex-direction: column;
   width: 100%;
   margin-top: 20px;
-  padding: 20px;
+  padding: 10px;
   border-radius: 12px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 1.0);
@@ -385,9 +386,9 @@ const Product = () => {
           </AddContainer>
         </InfoContainer>
         <CommentContainer>
-          <h2 style={{color:"teal", padding:" "}}>Comment Section</h2>
+          <h2 style={{color:"teal"}}>Comment Section</h2>
           <Duo>
-            <input type="text" style={{border:"none", outline:"0", width:"50%", marginLeft:"2%"}} onChange={(e) => setText(e.target.value)}/>
+            <input type="text" style={{border:"none", outline:"0", width:"50%", marginLeft:"2%", border:"teal 0.5px solid",borderRadius:"5px"}} onChange={(e) => setText(e.target.value)}/>
             <div style={{width:"50%", display:"flex", justifyContent:"right", alignItems:"center"}}>
               <ReactStars count={5} size={24} color2={'#008080'} value={rating} onChange={ratingChanged}/>
               <button style={{ border:"none", backgroundColor:"transparent", color:"teal", padding:"10px", cursor:"pointer", fontWeight:"600"}} onClick={()=>handleClick4()}>Add Review</button>
@@ -397,7 +398,7 @@ const Product = () => {
           </Duo>
           {edtmode &&
           <Duo style={{marginTop:"12px"}}>
-            <input type="text" style={{border:"none", outline:"0", width:"65%", marginLeft:"2%"}} onChange={(e) => setText2(e.target.value)}/>
+            <input type="text" style={{border:"none", outline:"0", width:"50%", marginLeft:"2%"}} onChange={(e) => setText2(e.target.value)}/>
             <div style={{width:"fit-content", display:"flex", justifyContent:"right", alignItems:"center"}}>
               <ReactStars count={5} size={24} color2={'#008080'} value={rating2} onChange={ratingChanged2}/>
               <DoneIcon style={{color:"teal", cursor:"pointer", marginTop:"1px", marginLeft:"3px"}} onClick={()=>handleEdit2(editId, editText, editRating)}/>
@@ -416,7 +417,7 @@ const Product = () => {
                 </Duo3>
               </Duo2>
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-                <span id="comment" style={{maxWidth:"600px", minWidth:"600px", wordWrap: "break-word", border:"none", padding:"10px", borderRadius:"12px", outline:"none", resize:"none"}} onChange={(e) => setText2(e.target.value)} >{comment.text}</span>
+                <span id="comment" style={{maxWidth:"400px", minWidth:"400px", wordWrap: "break-word", border:"none", padding:"10px", borderRadius:"12px", outline:"none", resize:"none"}} onChange={(e) => setText2(e.target.value)} >{comment.text}</span>
                 {admin ? 
                 <div style={{cursor:"pointer"}} id="iconcontainer">
                   <EditIcon style={{color:"teal"}} onClick={()=>handleEdit(comment._id, comment.text, comment.rating)}/>

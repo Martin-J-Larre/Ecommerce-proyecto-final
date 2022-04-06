@@ -25,6 +25,7 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-weight: 300;
   text-align: center;
+  margin-bottom: 20px;
 `;
 
 
@@ -46,12 +47,13 @@ const Bottom = styled.div`
 `;
 
 const Info = styled.div`
-  flex: 3;
+  flex: 2;
 `;
 
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
+  border-bottom:1px solid #eee;
   ${mobile({ flexDirection: "column" })}
 `;
 
@@ -61,8 +63,8 @@ const ProductDetail = styled.div`
 `;
 
 const Image = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 `;
 
@@ -82,8 +84,8 @@ const ProductClr = styled.div`
 `;
 
 const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 0.1px solid black;
   margin: 0% 2%;
@@ -126,10 +128,10 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
+  height: 400px;
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
-  height: 41vh;
 `;
 
 const SummaryTitle = styled.h1`
@@ -220,7 +222,7 @@ const Cart = () => {
       <Navbar />
       <Announcement />
       <Wrapper>
-        <Title>YOUR BAG</Title>
+        <Title>YOUR CART</Title>
         <Bottom>
           <Info>
             {cart.products.map((product) => (
