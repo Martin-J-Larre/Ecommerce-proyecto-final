@@ -3,14 +3,14 @@
 
 ## Demo
 ---
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/Martin-J-Larre/Ecommerce-proyecto-final/blob/main/admin/public/gifs/Kirei%20-%20Google%20Chrome%202022-04-06%2001-49-53.gif?raw=true)
 
 ----
 ### Por otro lado, cuenta con un panel admin! Donde el usuario admin, puede cargar productos, editarlos, borrarlos.
 ### También cambiar el estatus de los usuarios haciéndolos admin o no, además hay un pequeño panel de Analítica sobre los usuarios, otro para recibir los e-mails para Newsletter y Ordenes.
 ## Demo
 ---
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/Martin-J-Larre/Ecommerce-proyecto-final/blob/main/admin/public/gifs/Kirei%20admin%20panel%20-%20Google%20Chrome%202022-04-06%2002-00-22.gif?raw=true)
 
 ----
 ### El front fue contruido con React, Redux, Styled Components.
