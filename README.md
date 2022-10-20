@@ -27,6 +27,6 @@
   * Cd back 
   * npm run dev
 ---
-> Nota para Manza: Háblame por slack cuando lo corrijas porque tengo que explicarte sobre un error y si querés que te pase los .env así usas mis credenciales y no tenés que andar haciendo y  cargando miles de productos a la bd para chequear.
+
 
 # Muchas gracias por todo
